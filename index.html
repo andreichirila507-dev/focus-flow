@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Focus Flow — Timer Pomodoro cu Task-uri</title>
+<meta name="description" content="Timer Pomodoro simplu și rapid, cu listă de task-uri și streak zilnic. Fără cont, fără instalare — funcționează direct în browser.">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Focus Flow — Timer Pomodoro cu Task-uri">
+<meta property="og:description" content="Timer Pomodoro simplu și rapid, cu listă de task-uri și streak zilnic.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Focus Flow — Timer Pomodoro cu Task-uri">
+<meta name="twitter:description" content="Timer Pomodoro simplu și rapid, cu listă de task-uri și streak zilnic.">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>Focus Flow</h1>
+      <div class="streak" id="streak-display">
+        <span class="streak-flame">🔥</span>
+        <span id="streak-count">0</span>
+        <span class="streak-label">sesiuni azi</span>
+      </div>
+    </header>
+
+    <main class="main-grid">
+      <section class="timer-card">
+        <div class="mode-switch">
+          <button class="mode-btn active" data-mode="focus" data-minutes="25">Focus</button>
+          <button class="mode-btn" data-mode="short" data-minutes="5">Pauză scurtă</button>
+          <button class="mode-btn" data-mode="long" data-minutes="15">Pauză lungă</button>
+        </div>
+
+        <div class="timer-ring-wrap">
+          <svg class="timer-ring" viewBox="0 0 300 300">
+            <circle class="ring-bg" cx="150" cy="150" r="135"></circle>
+            <circle class="ring-progress" id="ring-progress" cx="150" cy="150" r="135"></circle>
+          </svg>
+          <div class="timer-center">
+            <div class="time-display" id="time-display">25:00</div>
+            <div class="active-task" id="active-task-display">Alege un task</div>
+          </div>
+        </div>
+
+        <div class="timer-controls">
+          <button class="control-btn secondary" id="reset-btn" title="Resetează">↺</button>
+          <button class="control-btn primary" id="start-pause-btn">Start</button>
+          <button class="control-btn secondary" id="skip-btn" title="Sari peste">⏭</button>
+        </div>
+      </section>
+
+      <section class="tasks-card">
+        <h2>Task-uri</h2>
+        <form id="task-form" class="task-form">
+          <input type="text" id="task-input" placeholder="Adaugă un task nou..." autocomplete="off" maxlength="80">
+          <button type="submit" class="add-btn">+</button>
+        </form>
+        <ul class="task-list" id="task-list"></ul>
+        <p class="empty-hint" id="empty-hint">Niciun task încă. Adaugă unul mai sus ✨</p>
+      </section>
+    </main>
+
+    <div class="celebrate-layer" id="celebrate-layer"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

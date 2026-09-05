@@ -1,0 +1,356 @@
+:root {
+  --bg: #f6f5f2;
+  --card: #ffffff;
+  --ink: #262420;
+  --ink-soft: #6b6862;
+  --accent: #e8623a;
+  --accent-soft: #fde9e0;
+  --focus: #e8623a;
+  --short: #4a9d8f;
+  --long: #5b6ee8;
+  --ring-bg: #ece9e3;
+  --border: #ebe8e2;
+  --shadow: 0 8px 24px rgba(38, 36, 32, 0.06);
+  --radius: 20px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+  position: relative;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.app-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.streak {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+}
+
+.streak-flame { font-size: 16px; }
+.streak-label { color: var(--ink-soft); font-weight: 500; }
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 720px) {
+  .main-grid { grid-template-columns: 1fr; }
+}
+
+.timer-card, .tasks-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+
+.mode-switch {
+  display: flex;
+  gap: 8px;
+  background: var(--bg);
+  padding: 5px;
+  border-radius: 999px;
+  margin-bottom: 28px;
+}
+
+.mode-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 8px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.mode-btn.active {
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgba(38,36,32,0.08);
+}
+
+.timer-ring-wrap {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  margin: 0 auto 28px;
+}
+
+.timer-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-bg {
+  fill: none;
+  stroke: var(--ring-bg);
+  stroke-width: 14;
+}
+
+.ring-progress {
+  fill: none;
+  stroke: var(--focus);
+  stroke-width: 14;
+  stroke-linecap: round;
+  stroke-dasharray: 848;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear, stroke 0.3s;
+}
+
+.timer-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.time-display {
+  font-size: 52px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.active-task {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timer-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.control-btn {
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.15s, background 0.2s, opacity 0.2s;
+}
+
+.control-btn.primary {
+  background: var(--accent);
+  color: white;
+  padding: 16px 44px;
+  border-radius: 999px;
+  font-size: 16px;
+}
+
+.control-btn.primary:hover { opacity: 0.92; }
+.control-btn.primary:active { transform: scale(0.97); }
+
+.control-btn.secondary {
+  background: var(--bg);
+  color: var(--ink-soft);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-btn.secondary:hover { background: var(--ring-bg); }
+
+.tasks-card h2 {
+  margin: 0 0 16px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.task-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.task-form input {
+  flex: 1;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  transition: border 0.2s;
+}
+
+.task-form input:focus { border-color: var(--accent); }
+
+.add-btn {
+  width: 44px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.add-btn:hover { opacity: 0.9; }
+
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.task-item:hover { border-color: var(--accent); }
+
+.task-item.selected {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.task-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--ink-soft);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: white;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.task-item.done .task-check {
+  background: var(--focus);
+  border-color: var(--focus);
+}
+
+.task-text {
+  flex: 1;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+.task-item.done .task-text {
+  text-decoration: line-through;
+  color: var(--ink-soft);
+}
+
+.task-pomodoros {
+  font-size: 12px;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+}
+
+.task-delete {
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+.task-delete:hover { background: rgba(0,0,0,0.06); color: var(--accent); }
+
+.empty-hint {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 13px;
+  margin: 24px 0 8px;
+}
+
+.celebrate-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.confetti {
+  position: absolute;
+  top: -20px;
+  width: 8px;
+  height: 14px;
+  opacity: 0.9;
+  animation: fall linear forwards;
+  border-radius: 2px;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+.timer-card.mode-focus .ring-progress { stroke: var(--focus); }
+.timer-card.mode-short .ring-progress { stroke: var(--short); }
+.timer-card.mode-long .ring-progress { stroke: var(--long); }
