@@ -48,9 +48,9 @@
         </div>
 
         <div class="timer-controls">
-          <button class="control-btn secondary" id="reset-btn" title="Resetează">↺</button>
+          <button class="control-btn secondary" id="reset-btn" title="Resetează" aria-label="Resetează cronometrul">↺</button>
           <button class="control-btn primary" id="start-pause-btn">Start</button>
-          <button class="control-btn secondary" id="skip-btn" title="Sari peste">⏭</button>
+          <button class="control-btn secondary" id="skip-btn" title="Sari peste" aria-label="Sari peste sesiunea curentă">⏭</button>
         </div>
       </section>
 
@@ -58,7 +58,7 @@
         <h2>Task-uri</h2>
         <form id="task-form" class="task-form">
           <input type="text" id="task-input" placeholder="Adaugă un task nou..." autocomplete="off" maxlength="80">
-          <button type="submit" class="add-btn">+</button>
+          <button type="submit" class="add-btn" aria-label="Adaugă task">+</button>
         </form>
         <ul class="task-list" id="task-list"></ul>
         <p class="empty-hint" id="empty-hint">Niciun task încă. Adaugă unul mai sus ✨</p>
